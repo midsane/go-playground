@@ -10,7 +10,7 @@ func main() {
 		print greeting message depending, get a person's name
 	*/
 	name := "satmak"
-	msg := fmt.Sprintf(Greet(), name)
+	msg := fmt.Sprintf(app.Greet(), name)
 	fmt.Println(msg)
 
 }
