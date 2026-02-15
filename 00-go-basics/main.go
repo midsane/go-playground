@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"reflect"
 )
 
 //lets understand types in general in go
@@ -119,11 +120,33 @@ func populate(c chan int) {
 	c <- val
 }
 
+func DummyFunc() (e error) {
+	e = errors.New("yoy")
+	panic("panic with err")
+}
+
+func Yep(f func() (e error)) (e error) {
+	defer func() {
+		if r := recover(); r != nil {
+			e = fmt.Errorf("err: %v", r)
+		}
+	}()
+	return f()
+}
 
 /*
-defere, panic and recover
-
+golang reflect -
 */
+func ReflectPrimer(){
+	var lavru any = 12
+	tl := reflect.TypeOf(lavru)
+	//at complile time(static type) of lavru is any -> but runtime type will be int, can be checked by reflect.TypeOf(variable0)
+	vl := reflect.ValueOf(lavru)
+	//even runtime value can be inspected via reflect.ValueOf
+	fmt.Println(tl,vl)
+}
+
+
 func main() {
 	file := File{}
 	dta, err := file.Read([]byte{2, 3})
@@ -146,7 +169,26 @@ func main() {
 		go populate(c)
 	}
 
-	a, b, c2, d := <-c, <-c, <-c, <-c
-	fmt.Println(a,b,c2,d)
+	// a, b, c2, d := <-c, <-c, <-c, <-c
+	// fmt.Println(a, b, c2, d)
 
+	fmt.Println("------------")
+
+	//if you already max capacit of the array just add that to avoid again and again
+	//realocation of memory for array after everytime lenght exceeds capacity
+	out := make([]int, 0, 2)
+	for i := range 2 {
+		out = append(out, i)
+	}
+	// fmt.Println(out)
+
+	// fmt.Println("------------")
+
+	// fmt.Println(yep(dummyFunc))
+
+	// StartSever()
+
+	
+	fmt.Println("------------")
+	ReflectPrimer()
 }
