@@ -66,7 +66,7 @@ import (
 
 /*
 concept of method set in golang:
-method sets basically determines which methods are associated with a given type: 
+method sets basically determines which methods are associated with a given type:
 a method can have two types of receiver type ->
 1. value receiver type func (t T) MethodName()
 2. ptr receiver type func(t *T) MethodName()
@@ -92,9 +92,9 @@ that's because ServeHTTP method receiver type is *ServeMux.
 so value ServeMux dont implement Handler, like *ServeMux implements.
 (this is done because ServeMux has fields like mutext which should be shared via ptr, not copies)
 and http.Handler ofc implments Handler.
-
 */
-func main() {
+
+func Test() {
 	srv := http.ServeMux{}
 	srv.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "hello word")
