@@ -2,14 +2,6 @@
 
 This repository is a **deliberate, modular learning system** for mastering Go backend development from first principles to production-level systems.
 
-Each folder:
-- Is **independent**
-- Has its **own `go.mod`**
-- Focuses on **one backend concept**
-- Avoids magic and abstractions until fundamentals are solid
-
----
-
 ## 00-go-basics
 
 ### Tasks
